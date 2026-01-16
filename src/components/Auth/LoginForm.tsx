@@ -65,6 +65,34 @@ export function LoginForm() {
     }
   };
 
+  const handleAdminLogin = async () => {
+    setErro('');
+    
+    if (!dbReady) {
+      setErro('Aguardando inicialização...');
+      return;
+    }
+
+    setEmail('admin@auditoria.com');
+    setSenha('123456');
+    setLoading(true);
+
+    try {
+      const sucesso = await login('admin@auditoria.com', '123456');
+      if (sucesso) {
+        // Navegar após login bem-sucedido
+        navigate('/pacientes', { replace: true });
+      } else {
+        setErro('Erro ao fazer login como administrador');
+      }
+    } catch (error) {
+      console.error('Erro no login admin:', error);
+      setErro('Erro ao fazer login. Tente novamente.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-card">
@@ -105,9 +133,21 @@ export function LoginForm() {
           </button>
         </form>
 
+        <div className="admin-access">
+          <button
+            type="button"
+            onClick={handleAdminLogin}
+            className="btn-admin"
+            disabled={loading || !dbReady}
+          >
+            🔐 Acesso Administrador
+          </button>
+        </div>
+
         <div className="login-hint">
           <p>Usuários de teste:</p>
           <ul>
+            <li>admin@auditoria.com / 123456 (Administrador)</li>
             <li>joao.silva@hospital.com / 123456</li>
             <li>maria.santos@hospital.com / 123456</li>
             <li>carlos.oliveira@auditoria.com / 123456</li>

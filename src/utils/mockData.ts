@@ -147,6 +147,15 @@ export async function popularDadosIniciais() {
     const usuariosExistentes = await db.usuarios.count();
     if (usuariosExistentes === 0) {
       await db.usuarios.bulkAdd(usuariosMock);
+    } else {
+      // Garantir que o usuário admin sempre exista
+      const adminExistente = await db.usuarios.where('email').equals('admin@auditoria.com').first();
+      if (!adminExistente) {
+        const adminUser = usuariosMock.find(u => u.email === 'admin@auditoria.com');
+        if (adminUser) {
+          await db.usuarios.add(adminUser);
+        }
+      }
     }
 
     // Popular internações de teste
