@@ -1,70 +1,97 @@
 .paciente-card {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s;
-  border: 1px solid #e5e7eb;
+  position: relative;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  border: 1px solid var(--color-border);
   cursor: pointer;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.paciente-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(16, 185, 129, 0.03) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
 }
 
 .paciente-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--color-primary-light);
+}
+
+.paciente-card:hover::before {
+  opacity: 1;
 }
 
 .paciente-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 16px;
-  gap: 12px;
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-md);
 }
 
 .paciente-header-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-md);
 }
 
 .paciente-nome {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
   flex: 1;
+  transition: color var(--transition-base);
+  letter-spacing: -0.01em;
+}
+
+.paciente-card:hover .paciente-nome {
+  color: var(--color-primary);
 }
 
 .paciente-data {
-  font-size: 14px;
-  color: #666;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   white-space: nowrap;
+  font-weight: var(--font-weight-medium);
 }
 
 .paciente-info-simple {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 12px;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border-light);
 }
 
 .info-item-simple {
   display: flex;
-  gap: 8px;
+  gap: var(--spacing-sm);
   align-items: center;
 }
 
 .info-label-simple {
-  font-weight: 500;
-  color: #666;
-  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
   min-width: 120px;
 }
 
 .info-value-simple {
-  color: #333;
-  font-size: 14px;
-  font-weight: 500;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 .btn-eye {
@@ -72,25 +99,33 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background 0.2s;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-text-secondary);
 }
 
 .btn-eye:hover {
-  background: #f3f4f6;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  transform: scale(1.1);
 }
 
 .btn-eye:active {
-  background: #e5e7eb;
+  transform: scale(0.95);
+}
+
+.btn-eye:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 @media (max-width: 768px) {
   .paciente-card {
-    padding: 16px;
+    padding: var(--spacing-md);
   }
 
   .paciente-header {
@@ -98,6 +133,6 @@
   }
 
   .paciente-nome {
-    font-size: 16px;
+    font-size: var(--font-size-base);
   }
 }

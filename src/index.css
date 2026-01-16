@@ -1,7 +1,11 @@
+/* Importar Design Tokens e Animações */
+@import './styles/design-tokens.css';
+@import './styles/animations.css';
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,11 +21,45 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f3f4f6;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
 }
 
 #root {
   width: 100%;
   margin: 0;
   padding: 0;
+}
+
+/* Scrollbar customizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface-elevated);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-dark);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* Focus visível para acessibilidade */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remover outline padrão para elementos que não precisam */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
 }
