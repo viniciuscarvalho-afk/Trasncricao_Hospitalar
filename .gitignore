@@ -23,3 +23,19 @@ dist-ssr
 *.sln
 *.sw?
 
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Build outputs
+dev-dist
+build
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
