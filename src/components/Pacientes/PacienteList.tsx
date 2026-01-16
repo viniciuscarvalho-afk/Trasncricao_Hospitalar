@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useInternacoes, useTranscricoes } from '../../hooks/useInternacao';
+import { useInternacoes } from '../../hooks/useInternacao';
 import { Internacao } from '../../types';
 import { PacienteCard } from './PacienteCard';
 import { MessageModal } from './MessageModal';
@@ -9,7 +9,6 @@ import './PacienteList.css';
 export function PacienteList() {
   const navigate = useNavigate();
   const { internacoes, loading } = useInternacoes();
-  const { transcricoes } = useTranscricoes();
   const [selectedHospital, setSelectedHospital] = useState<string>('');
   const [selectedPaciente, setSelectedPaciente] = useState<string>('');
   const [modalInternacao, setModalInternacao] = useState<Internacao | null>(null);
@@ -46,12 +45,6 @@ export function PacienteList() {
     setSelectedPaciente('');
     setModalInternacao(null);
   }, [selectedHospital]);
-
-  // Não abrir modal automaticamente - apenas ao clicar no card
-
-  const getTranscricoesCount = (internacaoId: string) => {
-    return transcricoes.filter((t) => t.internacaoId === internacaoId).length;
-  };
 
   const handleCardClick = (internacao: Internacao) => {
     setModalInternacao(internacao);
