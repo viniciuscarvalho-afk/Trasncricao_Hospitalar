@@ -14,7 +14,14 @@ export function Header() {
   return (
     <header className="app-header">
       <div className="header-content">
-        <h1 className="header-title">Auditoria de Leito</h1>
+        <div className="header-logo-title">
+          <img 
+            src="/logo-original.png" 
+            alt="Leve saúde" 
+            className="header-logo"
+          />
+          <h1 className="header-title">Auditoria de Leito</h1>
+        </div>
         <div className="header-user">
           <span className="user-name">{user?.nome}</span>
           <button onClick={handleLogout} className="btn-logout">

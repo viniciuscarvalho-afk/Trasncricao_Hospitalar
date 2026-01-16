@@ -96,6 +96,13 @@ export function LoginForm() {
   return (
     <div className="login-container">
       <div className="login-card">
+        <div className="login-logo-container">
+          <img 
+            src="/logo-original.png" 
+            alt="Leve saúde" 
+            className="login-logo"
+          />
+        </div>
         <h1>Auditoria de Leito</h1>
         <p className="subtitle">Faça login para continuar</p>
         

@@ -20,6 +20,19 @@
   align-items: center;
 }
 
+.header-logo-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.header-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  animation: fadeIn 0.6s ease-out 0.1s both;
+}
+
 .header-title {
   margin: 0;
   font-size: var(--font-size-xl);
@@ -74,6 +87,10 @@
 @media (max-width: 768px) {
   .app-header {
     padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .header-logo {
+    height: 32px;
   }
 
   .header-title {
