@@ -17,7 +17,7 @@ export function Header() {
         <div className="header-logo-title">
           <img 
             src="/logo-original.png" 
-            alt="Leve saúde" 
+            alt="Leve Saúde" 
             className="header-logo"
           />
           <h1 className="header-title">Auditoria de Leito</h1>

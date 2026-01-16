@@ -97,6 +97,10 @@
     font-size: var(--font-size-lg);
   }
 
+  .header-logo-title {
+    gap: var(--spacing-sm);
+  }
+
   .user-name {
     display: none;
   }

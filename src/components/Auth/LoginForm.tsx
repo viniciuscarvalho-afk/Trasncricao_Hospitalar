@@ -99,7 +99,7 @@ export function LoginForm() {
         <div className="login-logo-container">
           <img 
             src="/logo-original.png" 
-            alt="Leve saúde" 
+            alt="Leve Saúde" 
             className="login-logo"
           />
         </div>

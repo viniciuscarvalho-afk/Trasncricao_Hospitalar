@@ -10,9 +10,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'logo-original.png'],
       manifest: {
-        name: 'Auditoria de Leito - Leve saúde',
-        short_name: 'Leve saúde',
-        description: 'Gestão eficiente de recursos - Auditoria de Leito - Leve saúde',
+        name: 'Auditoria de Leito',
+        short_name: 'Auditoria Leito',
+        description: 'Gestão eficiente de recursos - Auditoria de Leito',
         theme_color: '#667eea',
         background_color: '#ffffff',
         display: 'standalone',

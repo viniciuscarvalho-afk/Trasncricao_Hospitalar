@@ -52,9 +52,10 @@
 }
 
 .login-logo {
-  max-width: 200px;
-  height: auto;
+  height: 60px;
+  width: auto;
   object-fit: contain;
+  max-width: 100%;
 }
 
 .login-card h1 {

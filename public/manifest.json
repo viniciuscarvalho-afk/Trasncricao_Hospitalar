@@ -1,7 +1,7 @@
 {
-  "name": "Auditoria de Leito - Leve saúde",
-  "short_name": "Leve saúde",
-  "description": "Gestão eficiente de recursos - Auditoria de Leito - Leve saúde",
+  "name": "Auditoria de Leito",
+  "short_name": "Auditoria Leito",
+  "description": "Gestão eficiente de recursos - Auditoria de Leito",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
