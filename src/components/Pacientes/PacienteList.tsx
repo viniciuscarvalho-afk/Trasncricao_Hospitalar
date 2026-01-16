@@ -14,9 +14,12 @@ export function PacienteList() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
+  const [isListening, setIsListening] = useState<boolean>(false);
+  const [speechEnabled, setSpeechEnabled] = useState<boolean>(true);
   const [modalInternacao, setModalInternacao] = useState<Internacao | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   // Extrair lista única de hospitais
   const hospitais = useMemo(() => {
@@ -54,8 +57,38 @@ export function PacienteList() {
     return internacoesPorHospital.filter(int => int.nomePaciente === selectedPaciente);
   }, [internacoesPorHospital, selectedPaciente]);
 
+  // Inicializar reconhecimento de voz
+  useEffect(() => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'pt-BR';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setSearchQuery(transcript);
+        setShowSuggestions(true);
+        setIsListening(false);
+      };
+      
+      recognition.onerror = (event: any) => {
+        console.error('Erro no reconhecimento de voz:', event.error);
+        setIsListening(false);
+      };
+      
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+      
+      recognitionRef.current = recognition;
+    }
+  }, []);
+
   // Função para síntese de voz
   const speakPatientName = (nome: string) => {
+    if (!speechEnabled) return;
     if ('speechSynthesis' in window) {
       // Cancelar qualquer fala anterior
       speechSynthesis.cancel();
@@ -65,6 +98,35 @@ export function PacienteList() {
       utterance.volume = 1;
       speechSynthesis.speak(utterance);
     }
+  };
+
+  // Funções para reconhecimento de voz
+  const startVoiceRecognition = () => {
+    if (recognitionRef.current && !isListening) {
+      try {
+        recognitionRef.current.start();
+        setIsListening(true);
+      } catch (error) {
+        console.error('Erro ao iniciar reconhecimento de voz:', error);
+        setIsListening(false);
+      }
+    }
+  };
+
+  const stopVoiceRecognition = () => {
+    if (recognitionRef.current && isListening) {
+      try {
+        recognitionRef.current.stop();
+        setIsListening(false);
+      } catch (error) {
+        console.error('Erro ao parar reconhecimento de voz:', error);
+        setIsListening(false);
+      }
+    }
+  };
+
+  const isVoiceRecognitionSupported = () => {
+    return 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
   };
 
   // Handler para seleção de paciente
@@ -83,7 +145,16 @@ export function PacienteList() {
     setShowSuggestions(false);
     setActiveIndex(-1);
     setModalInternacao(null);
-  }, [selectedHospital]);
+    // Parar reconhecimento de voz se estiver ativo
+    if (isListening && recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+        setIsListening(false);
+      } catch (error) {
+        // Ignorar erros ao parar
+      }
+    }
+  }, [selectedHospital, isListening]);
 
   // Fechar sugestões ao clicar fora
   useEffect(() => {
@@ -212,6 +283,29 @@ export function PacienteList() {
                 aria-expanded={showSuggestions}
                 aria-controls="paciente-suggestions"
               />
+              <div className="voice-controls">
+                {isVoiceRecognitionSupported() && (
+                  <button
+                    type="button"
+                    className={`btn-voice ${isListening ? 'listening' : ''}`}
+                    onClick={isListening ? stopVoiceRecognition : startVoiceRecognition}
+                    title={isListening ? 'Parar gravação' : 'Falar nome do paciente'}
+                    aria-label={isListening ? 'Parar gravação de voz' : 'Iniciar gravação de voz'}
+                    disabled={!selectedHospital}
+                  >
+                    🎤
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className={`btn-voice-toggle ${speechEnabled ? 'active' : ''}`}
+                  onClick={() => setSpeechEnabled(!speechEnabled)}
+                  title={speechEnabled ? 'Desativar áudio' : 'Ativar áudio'}
+                  aria-label={speechEnabled ? 'Desativar síntese de voz' : 'Ativar síntese de voz'}
+                >
+                  🔊 {speechEnabled ? 'Ativado' : 'Desativado'}
+                </button>
+              </div>
               {showSuggestions && filteredPacientes.length > 0 && (
                 <div
                   ref={suggestionsRef}
