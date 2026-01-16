@@ -1,0 +1,81 @@
+.audio-recorder {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.audio-recorder-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-record,
+.btn-stop {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-record {
+  background: #10b981;
+  color: white;
+}
+
+.btn-record:hover:not(:disabled) {
+  background: #059669;
+}
+
+.btn-stop {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-stop:hover {
+  background: #dc2626;
+}
+
+.btn-record:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.icon-mic,
+.icon-stop {
+  font-size: 20px;
+}
+
+.audio-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.audio-preview audio {
+  width: 100%;
+}
+
+.btn-remove {
+  padding: 8px 16px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.btn-remove:hover {
+  background: #dc2626;
+}
+

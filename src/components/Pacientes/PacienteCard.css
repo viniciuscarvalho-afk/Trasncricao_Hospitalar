@@ -1,0 +1,103 @@
+.paciente-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+
+.paciente-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.paciente-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.paciente-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.paciente-nome {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.paciente-data {
+  font-size: 14px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.paciente-info-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.info-item-simple {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.info-label-simple {
+  font-weight: 500;
+  color: #666;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.info-value-simple {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-eye {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-eye:hover {
+  background: #f3f4f6;
+}
+
+.btn-eye:active {
+  background: #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .paciente-card {
+    padding: 16px;
+  }
+
+  .paciente-header {
+    flex-direction: column;
+  }
+
+  .paciente-nome {
+    font-size: 16px;
+  }
+}

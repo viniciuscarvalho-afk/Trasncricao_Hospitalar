@@ -1,0 +1,189 @@
+.paciente-detail-container {
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.btn-back {
+  padding: 8px 16px;
+  background: #e5e7eb;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.2s;
+}
+
+.btn-back:hover {
+  background: #d1d5db;
+}
+
+.paciente-info-header {
+  background: #f9fafb;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  border: 1px solid #e5e7eb;
+}
+
+.paciente-info-header p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.paciente-info-header strong {
+  color: #333;
+}
+
+.transcricoes-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transcricoes-section h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.transcricoes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.transcricao-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  background: #f9fafb;
+}
+
+.transcricao-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.transcricao-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.transcricao-date {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.transcricao-auditor {
+  font-size: 12px;
+  color: #999;
+}
+
+.transcricao-status {
+  padding: 4px 12px;
+  border-radius: 12px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.transcricao-content {
+  margin-bottom: 12px;
+}
+
+.transcricao-content p {
+  margin: 0;
+  color: #333;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.transcricao-files {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.file-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.file-link a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.file-link a:hover {
+  text-decoration: underline;
+}
+
+.empty-transcricoes {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+  color: #666;
+}
+
+.btn-primary {
+  padding: 12px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #5568d3;
+}
+
+@media (max-width: 768px) {
+  .paciente-detail-container {
+    padding: 16px;
+  }
+
+  .detail-card,
+  .transcricoes-section {
+    padding: 16px;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .detail-label {
+    min-width: auto;
+  }
+}
+
