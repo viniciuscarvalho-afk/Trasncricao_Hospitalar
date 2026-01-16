@@ -6,35 +6,48 @@ export const usuariosMock: Usuario[] = [
     nome: 'Dr. João Silva',
     email: 'joao.silva@hospital.com',
     senha: '123456',
-    tipo: 'medico'
+    tipo: 'medico',
+    hospitaisPermitidos: ['Hospital São Paulo'] // Apenas 1 hospital - será selecionado automaticamente
   },
   {
     id: 'user_2',
     nome: 'Dra. Maria Santos',
     email: 'maria.santos@hospital.com',
     senha: '123456',
-    tipo: 'medico'
+    tipo: 'medico',
+    hospitaisPermitidos: ['Hospital Central', 'Hospital Regional'] // Múltiplos hospitais
   },
   {
     id: 'user_3',
     nome: 'Carlos Oliveira',
     email: 'carlos.oliveira@auditoria.com',
     senha: '123456',
-    tipo: 'auditor'
+    tipo: 'auditor',
+    // Sem hospitaisPermitidos - pode ver todos os hospitais
   },
   {
     id: 'user_4',
     nome: 'Ana Costa',
     email: 'ana.costa@auditoria.com',
     senha: '123456',
-    tipo: 'auditor'
+    tipo: 'auditor',
+    hospitaisPermitidos: ['Hospital Universitário'] // Apenas 1 hospital
   },
   {
     id: 'user_5',
     nome: 'Dr. Pedro Almeida',
     email: 'pedro.almeida@hospital.com',
     senha: '123456',
-    tipo: 'medico'
+    tipo: 'medico',
+    // Sem hospitaisPermitidos - pode ver todos os hospitais
+  },
+  {
+    id: 'user_admin',
+    nome: 'Administrador',
+    email: 'admin@auditoria.com',
+    senha: '123456',
+    tipo: 'admin',
+    // Admin pode ver todos os hospitais
   }
 ];
 

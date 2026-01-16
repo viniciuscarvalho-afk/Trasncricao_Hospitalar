@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useInternacoes } from '../../hooks/useInternacao';
+import { useAuth } from '../../hooks/useAuth';
 import { Internacao } from '../../types';
 import { PacienteCard } from './PacienteCard';
 import { MessageModal } from './MessageModal';
@@ -9,6 +10,7 @@ import './PacienteList.css';
 export function PacienteList() {
   const navigate = useNavigate();
   const { internacoes, loading } = useInternacoes();
+  const { user } = useAuth();
   const [selectedHospital, setSelectedHospital] = useState<string>('');
   const [selectedPaciente, setSelectedPaciente] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -21,11 +23,30 @@ export function PacienteList() {
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
 
-  // Extrair lista única de hospitais
-  const hospitais = useMemo(() => {
+  // Extrair lista única de hospitais (todos disponíveis)
+  const todosHospitais = useMemo(() => {
     const hospitaisUnicos = Array.from(new Set(internacoes.map(int => int.nomeHospital)));
     return hospitaisUnicos.sort();
   }, [internacoes]);
+
+  // Filtrar hospitais baseado em hospitaisPermitidos do usuário
+  const hospitais = useMemo(() => {
+    if (!user?.hospitaisPermitidos || user.hospitaisPermitidos.length === 0) {
+      // Se não tiver restrições, mostrar todos
+      return todosHospitais;
+    }
+    // Filtrar apenas os hospitais permitidos
+    return todosHospitais.filter(hospital => 
+      user.hospitaisPermitidos!.includes(hospital)
+    );
+  }, [todosHospitais, user]);
+
+  // Seleção automática quando há apenas 1 hospital permitido
+  useEffect(() => {
+    if (hospitais.length === 1 && !selectedHospital) {
+      setSelectedHospital(hospitais[0]);
+    }
+  }, [hospitais, selectedHospital]);
 
   // Filtrar internações por hospital
   const internacoesPorHospital = useMemo(() => {
@@ -241,19 +262,26 @@ export function PacienteList() {
       <div className="filters-section">
         <div className="filter-group">
           <label htmlFor="hospital-filter">Hospital</label>
-          <select
-            id="hospital-filter"
-            value={selectedHospital}
-            onChange={(e) => setSelectedHospital(e.target.value)}
-            className="filter-select"
-          >
-            <option value="">Selecione um hospital</option>
-            {hospitais.map((hospital) => (
-              <option key={hospital} value={hospital}>
-                {hospital}
-              </option>
-            ))}
-          </select>
+          {hospitais.length === 1 ? (
+            <div className="hospital-auto-selected">
+              <span className="hospital-name">{hospitais[0]}</span>
+              <span className="auto-badge">Selecionado automaticamente</span>
+            </div>
+          ) : (
+            <select
+              id="hospital-filter"
+              value={selectedHospital}
+              onChange={(e) => setSelectedHospital(e.target.value)}
+              className="filter-select"
+            >
+              <option value="">Selecione um hospital</option>
+              {hospitais.map((hospital) => (
+                <option key={hospital} value={hospital}>
+                  {hospital}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
 
         {selectedHospital && (

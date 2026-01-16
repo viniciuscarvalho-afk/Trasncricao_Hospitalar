@@ -31,6 +31,22 @@ export class AppDatabase extends Dexie {
         await tx.table('internacoes').put(internacao);
       }
     });
+    // Versão 3: Adiciona campo hospitaisPermitidos aos usuários
+    this.version(3).stores({
+      usuarios: 'id, email',
+      internacoes: 'id, dataInternacao, auditorId, nomePaciente, nomeHospital',
+      transcricoes: 'id, internacaoId, dataAnotacao, status'
+    }).upgrade(async (tx) => {
+      // Migration: adicionar campo hospitaisPermitidos aos usuários existentes
+      // Se não existir, deixa undefined para permitir acesso a todos os hospitais
+      const usuarios = await tx.table('usuarios').toCollection().toArray();
+      for (const usuario of usuarios) {
+        if (!('hospitaisPermitidos' in usuario)) {
+          // Manter undefined para permitir acesso a todos os hospitais (compatibilidade)
+          await tx.table('usuarios').put(usuario);
+        }
+      }
+    });
   }
 }
 

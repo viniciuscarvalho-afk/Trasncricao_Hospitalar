@@ -3,7 +3,8 @@ export interface Usuario {
   nome: string;
   email: string;
   senha?: string; // hash
-  tipo: 'medico' | 'auditor';
+  tipo: 'medico' | 'auditor' | 'admin';
+  hospitaisPermitidos?: string[]; // Lista de hospitais que o usuário pode visualizar. Se vazio/null, pode ver todos.
 }
 
 export interface Internacao {

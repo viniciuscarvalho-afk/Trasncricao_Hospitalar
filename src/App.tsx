@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './components/Auth/ProtectedRoute';
+import { AdminRoute } from './components/Auth/AdminRoute';
 import { LoginForm } from './components/Auth/LoginForm';
 import { Header } from './components/Layout/Header';
 import { Navigation } from './components/Layout/Navigation';
 import { InternacaoForm } from './components/Internacao/InternacaoForm';
 import { PacienteList } from './components/Pacientes/PacienteList';
 import { PacienteDetail } from './components/Pacientes/PacienteDetail';
+import { UserManagement } from './components/Admin/UserManagement';
 import { popularDadosIniciais } from './utils/mockData';
 import './App.css';
 
@@ -35,6 +37,14 @@ function App() {
                     <Route path="/pacientes" element={<PacienteList />} />
                     <Route path="/pacientes/:id" element={<PacienteDetail />} />
                     <Route path="/internacao/nova" element={<InternacaoForm />} />
+                    <Route
+                      path="/admin/usuarios"
+                      element={
+                        <AdminRoute>
+                          <UserManagement />
+                        </AdminRoute>
+                      }
+                    />
                     <Route path="/" element={<Navigate to="/pacientes" replace />} />
                   </Routes>
                 </main>

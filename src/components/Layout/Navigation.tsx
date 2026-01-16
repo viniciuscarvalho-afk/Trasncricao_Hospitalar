@@ -1,7 +1,12 @@
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import { AuthService } from '../../services/auth/authService';
 import './Navigation.css';
 
 export function Navigation() {
+  const { user } = useAuth();
+  const isAdmin = AuthService.isAdmin();
+
   return (
     <nav className="app-navigation">
       <NavLink to="/pacientes" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
@@ -10,6 +15,11 @@ export function Navigation() {
       <NavLink to="/internacao/nova" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
         Nova Internação
       </NavLink>
+      {isAdmin && (
+        <NavLink to="/admin/usuarios" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+          Administração
+        </NavLink>
+      )}
     </nav>
   );
 }

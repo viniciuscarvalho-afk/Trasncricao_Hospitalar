@@ -278,6 +278,32 @@
   font-weight: var(--font-weight-medium);
 }
 
+.hospital-auto-selected {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+}
+
+.hospital-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  flex: 1;
+}
+
+.auto-badge {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .paciente-list-container {
     padding: var(--spacing-md);
@@ -299,6 +325,11 @@
   .paciente-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
+  }
+
+  .hospital-auto-selected {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

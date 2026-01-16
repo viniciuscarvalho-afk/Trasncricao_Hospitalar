@@ -52,5 +52,10 @@ export class AuthService {
   static isAuthenticated(): boolean {
     return !!localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
   }
+
+  static isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return user?.tipo === 'admin';
+  }
 }
 
