@@ -1,10 +1,8 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
 import { AuthService } from '../../services/auth/authService';
 import './Navigation.css';
 
 export function Navigation() {
-  const { user } = useAuth();
   const isAdmin = AuthService.isAdmin();
 
   return (

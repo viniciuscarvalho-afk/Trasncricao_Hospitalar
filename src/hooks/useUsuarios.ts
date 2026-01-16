@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Usuario, Internacao } from '../types';
 import { db } from '../services/database/db';
 
